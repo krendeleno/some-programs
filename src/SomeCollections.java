@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static java.lang.Character.isDigit;
+
 public class SomeCollections {
     public static void main(String[] args) {
         System.out.println(task1());
@@ -17,7 +19,6 @@ public class SomeCollections {
         c.add(12);
         c.add(10);
         c.add(9);
-        task41(c);
         System.out.println(task41(c));
         ArrayList<Integer> d = new ArrayList<>();
         d.add(12);
@@ -25,6 +26,25 @@ public class SomeCollections {
         d.add(9);
         task42(d);
         System.out.println(d);
+
+        ArrayList<String> e = new ArrayList<>();
+        e.add("a");
+        e.add("b");
+        e.add("c");
+        task511(e);
+        System.out.println(d);
+        ArrayList<String> k = new ArrayList<>();
+        k.add("a");
+        k.add("b");
+        k.add("c");
+        System.out.println(task512(k));
+
+        ArrayList<String> t = new ArrayList<>();
+        t.add("a");
+        t.add("12");
+        t.add("c");
+        task521(t);
+        System.out.println(t);
     }
 
     private static List<Integer> task1() {
@@ -47,5 +67,65 @@ public class SomeCollections {
 
     private static void task42(ArrayList<Integer> a) {
         Collections.reverse(a);
+    }
+
+    private static void task511 (List<String> a) {
+        int count = 1;
+        for (String elem : a) {
+            if (count % 2 == 0)
+                a.remove(elem);
+            count++;
+        }
+    }
+
+    private static List<String> task512(List<String> a) {
+        List<String> b = new ArrayList<>();
+        int count = 1;
+        for (String elem : a) {
+            if (count % 2 != 0)
+                b.add(elem);
+            count++;
+        }
+        return b;
+    }
+
+    private static Boolean isNumber(String s) {
+        char[] sArray = s.toCharArray();
+        for (char c: sArray)
+            if (!isDigit(c))
+                    return false;
+            return true;
+    }
+
+    private static void task521(List<String> a) {
+        for (String elem : a)
+            if (isNumber(elem))
+                if (Integer.parseInt(elem) % 2 == 0)
+                    a.remove(elem);
+    }
+
+    private static List<String> task522(List<String> a) {
+        List<String> b = new ArrayList<>();
+        for (String elem : a)
+            if (isNumber(elem)) {
+                if (Integer.parseInt(elem) % 2 != 0)
+                    b.add(elem);
+            }
+        return b;
+    }
+
+    private static void task531(List<Integer> a) {
+        for (Integer elem : a)
+            if (elem % 2 == 0)
+                a.remove(elem);
+    }
+
+    private static List<Integer> task532(List<Integer> a) {
+        List<Integer> b = new ArrayList<>();
+        for (Integer elem : a)
+            if (elem % 2 != 0)
+                b.add(elem);
+
+        return b;
     }
 }

@@ -46,9 +46,7 @@ public class SomeCollections {
         task521(t);
         System.out.println(t);
 
-        System.out.println(task6HashSet("text.txt"));
-        System.out.println(task6TreeSet("text.txt"));
-        System.out.println(task6LinkedHashSet("text.txt"));
+        task6("text.txt");
     }
 
     private static List<Integer> task1() {
@@ -133,30 +131,23 @@ public class SomeCollections {
         return b;
     }
 
-    private static void handlingFile(String filename, Set<String> s) throws IOException{
+    private static void task6(String filename) throws IOException {
+        Set<String> s1 = new HashSet<>();
+        Set<String> s2 = new TreeSet<>();
+        Set<String> s3 = new LinkedHashSet<>();
         try (Scanner in = new Scanner(new File(filename), "utf-8")) {
-            while (in.hasNext())
-                s.add(in.next().toLowerCase().replaceAll("[^а-я/-]", ""));
+            String word;
+            while (in.hasNext()) {
+                word = in.next().toLowerCase().replaceAll("[^а-я/-]", "");
+                if (!(word.equals(" ") || word.equals(""))) {
+                    s1.add(word);
+                    s2.add(word);
+                    s3.add(word);
+                }
+            }
         }
-        s.remove(" ");
-        s.remove("");
-    }
-
-    private static Set<String> task6HashSet(String filename) throws IOException {
-        Set<String> s = new HashSet<>();
-        handlingFile(filename,s);
-        return s;
-    }
-
-    private static Set<String> task6TreeSet(String filename) throws IOException {
-        Set<String> s = new TreeSet<>();
-        handlingFile(filename,s);
-        return s;
-    }
-
-    private static Set<String> task6LinkedHashSet(String filename) throws IOException {
-        Set<String> s = new LinkedHashSet<>();
-        handlingFile(filename,s);
-        return s;
+        System.out.println(s1);
+        System.out.println(s2);
+        System.out.println(s3);
     }
 }

@@ -1,11 +1,11 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 import static java.lang.Character.isDigit;
 
 public class SomeCollections {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println(task1());
         List<String> a = new ArrayList<>();
 
@@ -45,6 +45,10 @@ public class SomeCollections {
         t.add("c");
         task521(t);
         System.out.println(t);
+
+        System.out.println(task6HashSet("text.txt"));
+        System.out.println(task6TreeSet("text.txt"));
+        System.out.println(task6LinkedHashSet("text.txt"));
     }
 
     private static List<Integer> task1() {
@@ -127,5 +131,32 @@ public class SomeCollections {
                 b.add(elem);
 
         return b;
+    }
+
+    private static void handlingFile(String filename, Set<String> s) throws IOException{
+        try (Scanner in = new Scanner(new File(filename), "utf-8")) {
+            while (in.hasNext())
+                s.add(in.next().toLowerCase().replaceAll("[^а-я/-]", ""));
+        }
+        s.remove(" ");
+        s.remove("");
+    }
+
+    private static Set<String> task6HashSet(String filename) throws IOException {
+        Set<String> s = new HashSet<>();
+        handlingFile(filename,s);
+        return s;
+    }
+
+    private static Set<String> task6TreeSet(String filename) throws IOException {
+        Set<String> s = new TreeSet<>();
+        handlingFile(filename,s);
+        return s;
+    }
+
+    private static Set<String> task6LinkedHashSet(String filename) throws IOException {
+        Set<String> s = new LinkedHashSet<>();
+        handlingFile(filename,s);
+        return s;
     }
 }

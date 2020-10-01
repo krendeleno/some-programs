@@ -26,25 +26,45 @@ public class SomeCollections {
         d.add(10);
         d.add(9);
         task42(d);
-       System.out.println(d);
+        System.out.println(d);
+        System.out.println("Пятые задачи");
 
         ArrayList<String> e = new ArrayList<>();
         e.add("a");
         e.add("b");
         e.add("c");
+        e.add("g");
         task511(e);
         ArrayList<String> k = new ArrayList<>();
         k.add("a");
         k.add("b");
         k.add("c");
-        System.out.println(task512(k));
+        k.add("c");
+        System.out.println("512: " + task512(k));
 
         ArrayList<String> t = new ArrayList<>();
         t.add("a");
         t.add("12");
         t.add("c");
+        t.add("14");
         task521(t);
-        System.out.println(t);
+        System.out.println("521: " + t);
+
+        ArrayList<Integer> h1 = new ArrayList<>();
+        h1.add(1);
+        h1.add(22);
+        h1.add(32);
+        h1.add(5);
+        task531(h1);
+        System.out.println(h1);
+
+        ArrayList<Integer> h2 = new ArrayList<>();
+        h2.add(1);
+        h2.add(22);
+        h2.add(3);
+        h2.add(52);
+        System.out.println(task532(h2));
+        System.out.println("Конец пятых задач");
 
         task6("text.txt");
     }
@@ -78,39 +98,33 @@ public class SomeCollections {
         }
     }
 
-    private static void task511 (List<String> a) {
-        int count = 1;
-        for (String elem : a) {
-            if (count % 2 == 0)
-                a.remove(elem);
-            count++;
-        }
+    private static void task511(List<String> a) {
+        for (int i = 0; i < a.size(); i++)
+            if (i % 2 == 0)
+                a.remove(a.get(i));
     }
 
     private static List<String> task512(List<String> a) {
         List<String> b = new ArrayList<>();
-        int count = 1;
-        for (String elem : a) {
-            if (count % 2 != 0)
-                b.add(elem);
-            count++;
-        }
+        for (int i = 0; i < a.size(); i++)
+            if (i % 2 != 0)
+                b.add(a.get(i));
         return b;
     }
 
     private static boolean isNumber(String s) {
         char[] sArray = s.toCharArray();
-        for (char c: sArray)
+        for (char c : sArray)
             if (!isDigit(c))
-                    return false;
-            return true;
+                return false;
+        return true;
     }
 
     private static void task521(List<String> a) {
-        for (String elem : a)
-            if (isNumber(elem))
-                if (Integer.parseInt(elem) % 2 == 0)
-                    a.remove(elem);
+        for (int i = 0; i < a.size(); i++)
+            if (isNumber(a.get(i)))
+                if (Integer.parseInt(a.get(i)) % 2 == 0)
+                    a.remove(a.get(i));
     }
 
     private static List<String> task522(List<String> a) {
@@ -124,9 +138,7 @@ public class SomeCollections {
     }
 
     private static void task531(List<Integer> a) {
-        for (Integer elem : a)
-            if (elem % 2 == 0)
-                a.remove(elem);
+        a.removeIf(x -> x % 2 == 0);
     }
 
     private static List<Integer> task532(List<Integer> a) {
@@ -134,7 +146,6 @@ public class SomeCollections {
         for (Integer elem : a)
             if (elem % 2 != 0)
                 b.add(elem);
-
         return b;
     }
 

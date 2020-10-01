@@ -19,20 +19,20 @@ public class SomeCollections {
         c.add(12);
         c.add(10);
         c.add(9);
+        c.add(8);
         System.out.println(task41(c));
         ArrayList<Integer> d = new ArrayList<>();
         d.add(12);
         d.add(10);
         d.add(9);
         task42(d);
-        System.out.println(d);
+       System.out.println(d);
 
         ArrayList<String> e = new ArrayList<>();
         e.add("a");
         e.add("b");
         e.add("c");
         task511(e);
-        System.out.println(d);
         ArrayList<String> k = new ArrayList<>();
         k.add("a");
         k.add("b");
@@ -51,24 +51,31 @@ public class SomeCollections {
 
     private static List<Integer> task1() {
         List<Integer> nums = new ArrayList<>();
-        for (int i = 1; i < 101; i++)
+        for (int i = 1; i <= 100; i++)
             nums.add(i);
         return nums;
     }
 
-    private static void task2(List<String> a, List<String> b) {
-        b.addAll(a);
+    private static List<String> task2(List<String> a, List<String> b) {
+        List<String> c = new ArrayList<>();
+        c.addAll(a);
+        c.addAll(b);
+        return c;
     }
 
     private static List<Integer> task41(List<Integer> a) {
-        List<Integer> b = new ArrayList<>();
-        for (Integer elem : a)
-            b.add(0, elem);
+        List<Integer> b = new ArrayList<>(a);
+        for (int i = 0, j = b.size() - 1; i < j; i++, j--)
+            Collections.swap(b, i, j);
         return b;
     }
 
-    private static void task42(ArrayList<Integer> a) {
-        Collections.reverse(a);
+    private static void task42(List<Integer> a) {
+        if (a.size() > 1) {
+            int elem = a.remove(0);
+            task42(a);
+            a.add(elem);
+        }
     }
 
     private static void task511 (List<String> a) {
@@ -91,7 +98,7 @@ public class SomeCollections {
         return b;
     }
 
-    private static Boolean isNumber(String s) {
+    private static boolean isNumber(String s) {
         char[] sArray = s.toCharArray();
         for (char c: sArray)
             if (!isDigit(c))

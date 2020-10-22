@@ -6,7 +6,7 @@ public class SomeAssociativeArrays {
     public static void main(String[] args) throws IOException {
         System.out.println(charCounter("banana"));
         System.out.println(charCounterIndex("banana"));
-        System.out.println(frequencyDictionary("text.txt"));
+        frequencyDictionary("text.txt");
     }
 
     private static Map<Character, Integer> charCounter(String word) {
@@ -33,22 +33,36 @@ public class SomeAssociativeArrays {
             return a;
     }
 
-    private static List<Map.Entry<String, Integer>> frequencyDictionary(String filename) throws IOException {
-        Map<String, Integer> dictionary = new HashMap<>();
+    private static void frequencyDictionary(String filename) throws IOException {
+        Map<String, Integer> dictionary1 = new HashMap<>();
+        Map<String, Integer> dictionary2 = new TreeMap<>();
+        Map<String, Integer> dictionary3 = new  LinkedHashMap<>();
         try (Scanner in = new Scanner(new File(filename), "utf-8")) {
             String word;
-            in.useDelimiter("[!,?.:—]*\\s*[!,?.:—]*\\s+");
+            in.useDelimiter("[«»—.,:;()?!\\s]+");
             while (in.hasNext()) {
                 word = in.next().toLowerCase();
-                if (dictionary.containsKey(word))
-                    dictionary.put(word, dictionary.get(word) + 1);
-                else
-                    dictionary.put(word, 1);
+                if (dictionary1.containsKey(word)) {
+                    dictionary1.put(word, dictionary1.get(word) + 1);
+                    dictionary2.put(word, dictionary2.get(word) + 1);
+                    dictionary3.put(word, dictionary3.get(word) + 1);
+                } else {
+                    dictionary1.put(word, 1);
+                    dictionary2.put(word, 1);
+                    dictionary3.put(word, 1);
+                }
             }
         }
-        Comparator<Map.Entry<String, Integer>> comparator = Comparator.comparing(Map.Entry::getValue);
-        List<Map.Entry<String, Integer>> a = new ArrayList<>(dictionary.entrySet());
+
+        List<Map.Entry<String, Integer>> a = new ArrayList<>(dictionary1.entrySet());
+        List<Map.Entry<String, Integer>> b = new ArrayList<>(dictionary2.entrySet());
+        List<Map.Entry<String, Integer>> c = new ArrayList<>(dictionary3.entrySet());
+        Comparator<Map.Entry<String, Integer>> comparator = (v1, v2) -> v1.getValue().compareTo(v2.getValue());
         Collections.sort(a, comparator.reversed());
-        return a;
+        Collections.sort(b, comparator.reversed());
+        Collections.sort(c, comparator.reversed());
+        System.out.println(a);
+        System.out.println(b);
+        System.out.println(c);
     }
 }

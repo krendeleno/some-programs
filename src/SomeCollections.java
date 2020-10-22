@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
@@ -6,105 +7,105 @@ import static java.lang.Character.isDigit;
 
 public class SomeCollections {
     public static void main(String[] args) throws IOException {
-        System.out.println(task1());
-        List<String> a = new ArrayList<>();
+        List<Integer> list100 = create100();
+        System.out.println("list100 = " + list100); // [1, 2, 3, ..., 100]
 
-        a.add("aaa");
-        List<String> b = new ArrayList<>();
-        b.add("bbb");
-        task2(a, b);
-        System.out.println(b);
+        List<String> list1 = List.of("abc", "xyz", "ooo");
+        printList(list1);
 
-        ArrayList<Integer> c = new ArrayList<>();
-        c.add(12);
-        c.add(10);
-        c.add(9);
-        c.add(8);
-        System.out.println(task41(c));
-        ArrayList<Integer> d = new ArrayList<>();
-        d.add(12);
-        d.add(10);
-        d.add(9);
-        task42(d);
-        System.out.println(d);
-        System.out.println("Пятые задачи");
+        List<String> list2 = List.of("abc", "xyz", "ooo");
+        printListWithIndexes(list2);
 
-        ArrayList<String> e = new ArrayList<>();
-        e.add("a");
-        e.add("b");
-        e.add("c");
-        e.add("g");
-        task511(e);
-        ArrayList<String> k = new ArrayList<>();
-        k.add("a");
-        k.add("b");
-        k.add("c");
-        k.add("c");
-        System.out.println("512: " + task512(k));
+        List<String> list3 = List.of("aaa", "bbb", "ccc");
+        List<String> list4 = List.of("xxx", "yyy", "zzz");
+        List<String> list3plusList4 = concatenateLists(list3, list4);
+        System.out.println(list3plusList4);
+        System.out.println(list3);
+        System.out.println(list4);
 
-        ArrayList<String> t = new ArrayList<>();
-        t.add("a");
-        t.add("12");
-        t.add("c");
-        t.add("14");
-        task521(t);
-        System.out.println("521: " + t);
+        List<String> list5 = new ArrayList<>(List.of("first", "middle", "last"));
+        List<String> list5rev = reverseList(list5);
+        System.out.println("list5rev = " + list5rev + ", but list5 = " + list5);
 
-        ArrayList<Integer> h1 = new ArrayList<>();
-        h1.add(1);
-        h1.add(22);
-        h1.add(32);
-        h1.add(5);
-        task531(h1);
-        System.out.println(h1);
+        reverseListInPlace(list5);
+        System.out.println("list5 = " + list5);
 
-        ArrayList<Integer> h2 = new ArrayList<>();
-        h2.add(1);
-        h2.add(22);
-        h2.add(3);
-        h2.add(52);
-        System.out.println(task532(h2));
-        System.out.println("Конец пятых задач");
+        List<String> ints = List.of("11", "22", "33", "55", "66", "88", "100", "3", "4");
 
-        task6("text.txt");
+        System.out.println("ints = " + ints);
+        System.out.println("ints no even indices = " + filterEvenIndices(ints)); //["22", "55", "88", "3"]
+        System.out.println("ints without even = " + filterEven(ints)); //["11", "33", "55", "3"]
+        List<Integer> ints2 = List.of(11, 22, 33, 55, 66, 88, 100, 3, 4);
+        System.out.println("ints without even = " + filterEven2(ints2)); //[11, 33, 55, 3]
+
+        System.out.println(" ============= mutable lists =================== ");
+
+        List<String> mutableInts = new ArrayList<>(ints);
+        mutableFilterEvenIndices(mutableInts);
+        System.out.println("ints no even indices = " + mutableInts); //["22", "55", "88", "3"]
+
+        mutableInts = new ArrayList<>(ints);
+        mutableFilterEven(mutableInts);
+        System.out.println("ints without even = " + mutableInts); //["11", "33", "55", "3"]
+
+        List<Integer> mutableInts2 = new ArrayList<>(ints2);
+        mutableFilterEven2(mutableInts2);
+        System.out.println("ints without even = " + mutableInts2); //[11, 33, 55, 3]
+
+        Reading("text.txt");
     }
-
-    private static List<Integer> task1() {
+    
+    private static List<Integer> create100() {
         List<Integer> nums = new ArrayList<>();
         for (int i = 1; i <= 100; i++)
             nums.add(i);
         return nums;
     }
 
-    private static List<String> task2(List<String> a, List<String> b) {
+    private static void printList(List<String> a) {
+        System.out.println("Количество элементов в списке: " + a.size());
+        for (String elem : a)
+            System.out.println(elem);
+    }
+
+    private static void printListWithIndexes(List<String> a) {
+        System.out.println("Количество элементов в списке: " + a.size());
+        for (int i = 0; i < a.size(); i++)
+            System.out.println((i + 1) + ": " + a.get(i));
+    }
+
+
+    private static List<String> concatenateLists(List<String> a, List<String> b) {
         List<String> c = new ArrayList<>();
         c.addAll(a);
         c.addAll(b);
         return c;
     }
 
-    private static List<Integer> task41(List<Integer> a) {
-        List<Integer> b = new ArrayList<>(a);
+    private static List<String> reverseList(List<String> a) {
+        List<String> b = new ArrayList<>(a);
         for (int i = 0, j = b.size() - 1; i < j; i++, j--)
             Collections.swap(b, i, j);
         return b;
     }
 
-    private static void task42(List<Integer> a) {
+    private static void reverseListInPlace(List<String> a) {
         if (a.size() > 1) {
-            int elem = a.remove(0);
-            task42(a);
+            String elem = a.remove(0);
+            reverseListInPlace(a);
             a.add(elem);
         }
     }
 
-    private static void task511(List<String> a) {
+    private static void mutableFilterEvenIndices(List<String> a) {
+        List<String> b = new ArrayList<>();
         for (int i = 0; i < a.size(); i++)
             if (i % 2 == 0)
-                a.remove(a.get(i));
+                b.add(a.get(i));
+            a.removeAll(b);
     }
 
-    private static List<String> task512(List<String> a) {
+    private static List<String> filterEvenIndices(List<String> a) {
         List<String> b = new ArrayList<>();
         for (int i = 0; i < a.size(); i++)
             if (i % 2 != 0)
@@ -120,14 +121,16 @@ public class SomeCollections {
         return true;
     }
 
-    private static void task521(List<String> a) {
+    private static void mutableFilterEven(List<String> a) {
+        List<String> b = new ArrayList<>();
         for (int i = 0; i < a.size(); i++)
             if (isNumber(a.get(i)))
                 if (Integer.parseInt(a.get(i)) % 2 == 0)
-                    a.remove(a.get(i));
+                    b.add(a.get(i));
+                a.removeAll(b);
     }
 
-    private static List<String> task522(List<String> a) {
+    private static List<String> filterEven(List<String> a) {
         List<String> b = new ArrayList<>();
         for (String elem : a)
             if (isNumber(elem)) {
@@ -137,11 +140,11 @@ public class SomeCollections {
         return b;
     }
 
-    private static void task531(List<Integer> a) {
+    private static void mutableFilterEven2(List<Integer> a) {
         a.removeIf(x -> x % 2 == 0);
     }
 
-    private static List<Integer> task532(List<Integer> a) {
+    private static List<Integer> filterEven2(List<Integer> a) {
         List<Integer> b = new ArrayList<>();
         for (Integer elem : a)
             if (elem % 2 != 0)
@@ -149,23 +152,28 @@ public class SomeCollections {
         return b;
     }
 
-    private static void task6(String filename) throws IOException {
-        Set<String> s1 = new HashSet<>();
-        Set<String> s2 = new TreeSet<>();
-        Set<String> s3 = new LinkedHashSet<>();
+    private static void Reading(String filename) throws IOException {
+        Set<String> hashSet = new HashSet<>();
+        Set<String> linkedHashSet = new LinkedHashSet<>();
+        Set<String> treeSet = new TreeSet<>();
+
+        doReadWordsInFile(filename, hashSet);
+        doReadWordsInFile(filename, linkedHashSet);
+        doReadWordsInFile(filename, treeSet);
+
+        System.out.println(hashSet);
+        System.out.println(linkedHashSet);
+        System.out.println(treeSet);
+    }
+
+    private static void doReadWordsInFile(String filename, Set<String> set) throws FileNotFoundException {
         try (Scanner in = new Scanner(new File(filename), "utf-8")) {
             String word;
             while (in.hasNext()) {
                 word = in.next().toLowerCase().replaceAll("[^а-я/-]", "");
-                if (!(word.equals(" ") || word.equals(""))) {
-                    s1.add(word);
-                    s2.add(word);
-                    s3.add(word);
-                }
+                if (!(word.equals(" ") || word.equals("")))
+                    set.add(word);
             }
         }
-        System.out.println(s1);
-        System.out.println(s2);
-        System.out.println(s3);
     }
 }

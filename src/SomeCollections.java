@@ -52,7 +52,7 @@ public class SomeCollections {
         mutableFilterEven2(mutableInts2);
         System.out.println("ints without even = " + mutableInts2); //[11, 33, 55, 3]
 
-        Reading("text.txt");
+        reading("text.txt");
     }
     
     private static List<Integer> create100() {
@@ -90,11 +90,8 @@ public class SomeCollections {
     }
 
     private static void reverseListInPlace(List<String> a) {
-        if (a.size() > 1) {
-            String elem = a.remove(0);
-            reverseListInPlace(a);
-            a.add(elem);
-        }
+        for (int i = 0, j = a.size() - 1; i < j; i++, j--)
+            Collections.swap(a, i, j);
     }
 
     private static void mutableFilterEvenIndices(List<String> a) {
@@ -152,7 +149,7 @@ public class SomeCollections {
         return b;
     }
 
-    private static void Reading(String filename) throws IOException {
+    private static void reading(String filename) throws IOException {
         Set<String> hashSet = new HashSet<>();
         Set<String> linkedHashSet = new LinkedHashSet<>();
         Set<String> treeSet = new TreeSet<>();

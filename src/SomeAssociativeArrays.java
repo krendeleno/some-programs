@@ -30,13 +30,13 @@ public class SomeAssociativeArrays {
             else
                 a.put(cWord[i], new ArrayList<>(List.of(i)));
         }
-            return a;
+        return a;
     }
 
     private static void frequencyDictionary(String filename) throws IOException {
         Map<String, Integer> dictionary1 = new HashMap<>();
         Map<String, Integer> dictionary2 = new TreeMap<>();
-        Map<String, Integer> dictionary3 = new  LinkedHashMap<>();
+        Map<String, Integer> dictionary3 = new LinkedHashMap<>();
         try (Scanner in = new Scanner(new File(filename), "utf-8")) {
             String word;
             in.useDelimiter("[«»—.,:;()?!\\s]+");
@@ -54,15 +54,17 @@ public class SomeAssociativeArrays {
             }
         }
 
-        List<Map.Entry<String, Integer>> a = new ArrayList<>(dictionary1.entrySet());
-        List<Map.Entry<String, Integer>> b = new ArrayList<>(dictionary2.entrySet());
-        List<Map.Entry<String, Integer>> c = new ArrayList<>(dictionary3.entrySet());
-        Comparator<Map.Entry<String, Integer>> comparator = (v1, v2) -> v1.getValue().compareTo(v2.getValue());
-        Collections.sort(a, comparator.reversed());
-        Collections.sort(b, comparator.reversed());
-        Collections.sort(c, comparator.reversed());
-        System.out.println(a);
-        System.out.println(b);
-        System.out.println(c);
+        sortDictionary(dictionary1);
+        sortDictionary(dictionary2);
+        sortDictionary(dictionary3);
     }
+
+    private static void sortDictionary(Map<String, Integer> dict) {
+        List<Map.Entry<String, Integer>> dictionary = new ArrayList<>(dict.entrySet());
+        Comparator<Map.Entry<String, Integer>> comparator = (v1, v2) -> v1.getValue().compareTo(v2.getValue());
+        Collections.sort(dictionary, comparator.reversed());
+        System.out.println(dictionary);
+    }
+
+
 }

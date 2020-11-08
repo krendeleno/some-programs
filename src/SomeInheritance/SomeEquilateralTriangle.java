@@ -1,10 +1,8 @@
 package SomeInheritance;
 
-public class SomeEquilateralTriangle implements SomeFigure {
-    private double a;
-
+public class SomeEquilateralTriangle extends SomeTriangle {
     public SomeEquilateralTriangle(double a) {
-        this.a = a;
+        super(a, a, a);
     }
 
     @Override
@@ -13,12 +11,12 @@ public class SomeEquilateralTriangle implements SomeFigure {
     }
 
     @Override
-    public double perimiter() {
-        return a * 3;
+    public String info() {
+        return "Правильный треугольник со стороной: " + a;
     }
 
     @Override
-    public String info() {
-        return "Правильный треугольник со стороной: " + a;
+    public double capacity() {
+        return 1 / (4 * 3 * Math.sqrt(3));
     }
 }

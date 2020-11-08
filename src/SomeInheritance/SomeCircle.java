@@ -21,4 +21,9 @@ public class SomeCircle implements SomeFigure {
     public String info() {
         return "Круг радиуса: " + r;
     }
+
+    @Override
+    public double capacity() {
+        return 1 / (4 * Math.PI);
+    }
 }

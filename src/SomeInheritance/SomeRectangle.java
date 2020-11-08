@@ -1,22 +1,14 @@
 package SomeInheritance;
 
-public class SomeRectangle implements SomeFigure {
-    public double a;
-    public double b;
+public class SomeRectangle extends SomeParallelogram {
 
     public SomeRectangle(double a, double b) {
-        this.a = a;
-        this.b = b;
+        super(a, b);
     }
 
     @Override
     public double area() {
         return a * b;
-    }
-
-    @Override
-    public double perimiter() {
-        return 2 * (a + b);
     }
 
     @Override

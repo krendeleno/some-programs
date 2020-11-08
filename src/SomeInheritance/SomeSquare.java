@@ -11,13 +11,14 @@ public class SomeSquare extends SomeRectangle {
         return a * a;
     }
 
-    @Override
-    public double perimiter() {
-        return a * 4;
-    }
 
     @Override
     public String info() {
         return "Квадрат со стороной: " + a;
+    }
+
+    @Override
+    public double capacity() {
+        return 1 / (double) 16;
     }
 }

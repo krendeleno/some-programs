@@ -38,10 +38,9 @@ public class SomeAssociativeArrays {
         Map<String, Integer> dictionary2 = new TreeMap<>();
         Map<String, Integer> dictionary3 = new LinkedHashMap<>();
         try (Scanner in = new Scanner(new File(filename), "utf-8")) {
-            String word;
             in.useDelimiter("[«»—.,:;()?!\\s]+");
             while (in.hasNext()) {
-                word = in.next().toLowerCase();
+                String word = in.next().toLowerCase();
                 if (dictionary1.containsKey(word)) {
                     dictionary1.put(word, dictionary1.get(word) + 1);
                     dictionary2.put(word, dictionary2.get(word) + 1);
@@ -61,8 +60,9 @@ public class SomeAssociativeArrays {
 
     private static void sortDictionary(Map<String, Integer> dict) {
         List<Map.Entry<String, Integer>> dictionary = new ArrayList<>(dict.entrySet());
-        Comparator<Map.Entry<String, Integer>> comparator = (v1, v2) -> v1.getValue().compareTo(v2.getValue());
-        Collections.sort(dictionary, comparator.reversed());
+        Comparator<Map.Entry<String, Integer>> comparator =
+                (v1, v2) -> v2.getValue().compareTo(v1.getValue());
+        Collections.sort(dictionary, comparator);
         System.out.println(dictionary);
     }
 

@@ -95,11 +95,9 @@ public class SomeCollections {
     }
 
     private static void mutableFilterEvenIndices(List<String> a) {
-        List<String> b = new ArrayList<>();
-        for (int i = 0; i < a.size(); i++)
+        for (int i = a.size() - 1; i >= 0; i--)
             if (i % 2 == 0)
-                b.add(a.get(i));
-            a.removeAll(b);
+                a.remove(i);
     }
 
     private static List<String> filterEvenIndices(List<String> a) {
@@ -138,12 +136,14 @@ public class SomeCollections {
     }
 
     private static void mutableFilterEven2(List<Integer> a) {
-        a.removeIf(x -> x % 2 == 0);
+        List<Integer> b = filterEven2(a);
+        a.removeAll(a);
+        a.addAll(b);
     }
 
     private static List<Integer> filterEven2(List<Integer> a) {
         List<Integer> b = new ArrayList<>();
-        for (Integer elem : a)
+        for (int elem : a)
             if (elem % 2 != 0)
                 b.add(elem);
         return b;

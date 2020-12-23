@@ -11,7 +11,7 @@ public class SomePrintableLetter implements SomethingPrintable {
 
     @Override
     public void print() {
-        for (int i = 0; i < 10; i++)
+        for (int k = 0; k < i; k++)
             System.out.println(x);
     }
 }

@@ -11,6 +11,7 @@ public class SomethingPrintableTest {
         ps.print(); //печатает asdf
 
         SomethingPrintable[] somePrints = {
+                new Drawing(5, 10, '*'),
                 new SomePrintableLetter('z', 3),
                 new SomePrintableString("I am a string"),
                 new SomethingPrintable() {
@@ -20,7 +21,6 @@ public class SomethingPrintableTest {
                     }
                 },
                 () -> System.out.println("Я просто лямбда-выражение")};
-
 
         Arrays.stream(somePrints).forEach(x -> x.print());
     }

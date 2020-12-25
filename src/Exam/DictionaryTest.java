@@ -5,7 +5,7 @@ import java.util.*;
 
 public class DictionaryTest {
     public static void main(String[] args) throws Exception {
-        dictReader("data2020/dictinary.txt");
+        dictReader("data2020/dictionary.txt");
         if (!dict.isEmpty()) {
             questionAnswerer("data2020/strict-queries.txt", "data2020/out.txt");
             questionAnswerer2("data2020/full-text-search.txt", "data2020/out2.txt");
@@ -22,7 +22,7 @@ public class DictionaryTest {
                 dict.add(newWord);
             }
         } catch (Exception e) {
-           System.out.println("проблема при чтении файла");
+            System.out.println("проблема при чтении файла");
         }
     }
 
@@ -32,14 +32,14 @@ public class DictionaryTest {
             Set<String> setTranslations = new HashSet<>();
             for (int i = 0; i < 10; i++) {
                 String word = in.next().toUpperCase();
-                for (DictionaryEntry d: dict) {
+                for (DictionaryEntry d : dict) {
                     if (d.getWord().equals(word))
                         setTranslations.add(d.getTranslation());
                 }
                 if (setTranslations.isEmpty())
                     out.println("Нет такого слова");
                 else
-                    for (String s: setTranslations)
+                    for (String s : setTranslations)
                         out.println(s);
             }
         }
@@ -51,14 +51,14 @@ public class DictionaryTest {
             Set<String> setTranslations = new HashSet<>();
             for (int i = 0; i < 10; i++) {
                 String word = in.next().toUpperCase();
-                for (DictionaryEntry d: dict) {
+                for (DictionaryEntry d : dict) {
                     if (d.getWord().contains(word))
                         setTranslations.add(d.getWord() + " " + d.getTranslation());
                 }
                 if (setTranslations.isEmpty())
                     out.println("Нет такого слова");
                 else
-                    for (String s: setTranslations)
+                    for (String s : setTranslations)
                         out.println(s);
             }
         }
